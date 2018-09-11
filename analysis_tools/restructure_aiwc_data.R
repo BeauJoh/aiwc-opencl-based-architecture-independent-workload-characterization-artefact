@@ -1,5 +1,5 @@
 
-source('../analysis_tools/load_aiwc_dataframes.R')
+source('./analysis_tools/load_aiwc_dataframes.R')
 
 featdata_labels <- c("Opcode",
                      "Granularity",

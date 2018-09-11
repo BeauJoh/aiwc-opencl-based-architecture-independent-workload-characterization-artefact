@@ -1,4 +1,4 @@
-source('../analysis_tools/load_aiwc_dataframes.R')
+source('./analysis_tools/load_aiwc_dataframes.R')
 
 x <- featdata.lud[featdata.lud$size=='tiny' & featdata.lud$kernel == 'lud_perimeter',]
 df <- data.frame()

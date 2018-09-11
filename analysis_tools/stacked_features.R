@@ -1,8 +1,8 @@
 
 #load('../data/intermediate/full_dat.Rda')
-load('../analysis_tools/newfeat.Rdf')
+load('./analysis_tools/newfeat.Rdf')
 
-source('../analysis_tools/restructure_aiwc_data.R')
+source('./analysis_tools/restructure_aiwc_data.R')
 featdata.all <- drop_metrics_for_simple_kiviat(featdata.all)
 full_dat <- reorder_features(featdata.all)
 

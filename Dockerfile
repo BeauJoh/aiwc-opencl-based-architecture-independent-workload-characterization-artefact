@@ -122,7 +122,7 @@ RUN make
 
 CMD ["/bin/bash"]
 
-WORKDIR /awic-evaluation
+WORKDIR /aiwc-evaluation
 ENV LD_LIBRARY_PATH "${OCLGRIND}/lib:${LSB}/lib:${LD_LIBRARYPATH}"
 ENV PATH "${PATH}:${OCLGRIND}/bin}"
 
