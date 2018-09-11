@@ -1,6 +1,6 @@
 # An Ubuntu environment configured for building the phd repo.
-FROM nvidia/opencl
-#FROM ubuntu:16.04
+#FROM nvidia/opencl
+FROM ubuntu:16.04
 
 MAINTAINER Beau Johnston <beau.johnston@anu.edu.au>
 
@@ -100,6 +100,9 @@ RUN Rscript -e "IRkernel::installspec(user = FALSE)"
 RUN Rscript -e "devtools::install_github('tidyverse/magrittr')"
 RUN Rscript -e "devtools::install_github('tidyverse/ggplot2')"
 RUN Rscript -e "devtools::install_github('tidyverse/tidyr')"
+RUN Rscript -e "devtools::install_github('BeauJoh/fmsb')"
+RUN Rscript -e "devtools::install_github('wilkelab/cowplot')"
+RUN Rscript -e "devtools::install_github('cran/gridGraphics')"
 
 # Install LetMeKnow
 RUN pip3 install -U 'lmk==0.0.14'
