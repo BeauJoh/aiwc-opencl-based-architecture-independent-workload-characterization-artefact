@@ -122,6 +122,7 @@ RUN make
 
 CMD ["/bin/bash"]
 
+RUN git clone https://github.com/BeauJoh/aiwc-opencl-based-architecture-independent-workload-characterization-artefact.git /aiwc-evaluation
 WORKDIR /aiwc-evaluation
 ENV LD_LIBRARY_PATH "${OCLGRIND}/lib:${LSB}/lib:${LD_LIBRARYPATH}"
 ENV PATH "${PATH}:${OCLGRIND}/bin}"
