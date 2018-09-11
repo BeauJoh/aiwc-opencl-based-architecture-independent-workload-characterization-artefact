@@ -71,7 +71,7 @@ RUN make
 RUN make install
 
 # Install R and model dependencies
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+RUN apt-key adv --keyserver keyserver.ubuntu.com:80 --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 RUN add-apt-repository 'deb [arch=amd64,i386] https://cran.rstudio.com/bin/linux/ubuntu xenial/'
 RUN apt-get update
 RUN apt-get install --no-install-recommends -y r-base libcurl4-openssl-dev libssl-dev r-cran-rcppeigen
@@ -122,7 +122,7 @@ RUN make
 
 CMD ["/bin/bash"]
 
-WORKDIR /guiding-optimisation-with-aiwc
+WORKDIR /awic-evaluation
 ENV LD_LIBRARY_PATH "${OCLGRIND}/lib:${LSB}/lib:${LD_LIBRARYPATH}"
 ENV PATH "${PATH}:${OCLGRIND}/bin}"
 

@@ -3,8 +3,11 @@
 
 This project uses Docker to facilitate reproducibility. As such, it has the following dependencies:
 
-* Cuda 9.0 Runtime -- available [here](https://developer.nvidia.com/cuda-downloads)
 * Docker -- available [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+
+Optional Dependencies:
+
+* Cuda 9.0 Runtime -- available [here](https://developer.nvidia.com/cuda-downloads)
 * nvidia-docker2, install instructions found [here](https://github.com/NVIDIA/nvidia-docker)
 * Docker nvidia container, installed with: `sudo apt install nvidia-container-runtime`
 
