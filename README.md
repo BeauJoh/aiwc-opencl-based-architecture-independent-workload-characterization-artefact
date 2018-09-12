@@ -36,7 +36,13 @@ from within the container and following the prompts to access it from the websit
 
 #Investigation
 
-If you wanted to run Oclgrind -- and AIWC -- on some fresh codes, the binary is located in / and the Extended OpenDwarfs Benchmark suite is located in /
-AIWC specific source-code can be found in: .cpp and .h
+If you wanted to run Oclgrind -- and AIWC -- on some fresh codes, the binary is located in /oclgrind/bin/oclgrind and the Extended OpenDwarfs Benchmark suite is located in /OpenDwarfs/build/
+AIWC specific source-code can be found in: /oclgrind-source/src/plugins/WorkloadCharacterisation.cpp and /oclgrind-source/src/plugins/WorkloadCharacterisation.h
 To run AIWC on any OpenCL code simply prepend the following to your OpenCL program binary with:
+
+~~~~
+cd /OpenDwarfs/build
+$OCLGRIND_BIN --workload-characterisation ./csr -i ../test/sparse-linear-algebra/SPMV/tiny
+cd /aiwc-evaluation
+~~~~
 
