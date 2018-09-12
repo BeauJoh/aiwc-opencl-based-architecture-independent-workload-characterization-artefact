@@ -1,6 +1,6 @@
 # An Ubuntu environment configured for building the phd repo.
 #FROM nvidia/opencl
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 MAINTAINER Beau Johnston <beau.johnston@anu.edu.au>
 
@@ -71,11 +71,15 @@ RUN make
 RUN make install
 
 # Install R and model dependencies
+RUN apt-get install --no-install-recommends -y dirmngr gpg-agent
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-RUN add-apt-repository 'deb [arch=amd64,i386] https://cran.rstudio.com/bin/linux/ubuntu xenial/'
+RUN add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
 RUN apt-get update
-RUN apt-get install --no-install-recommends -y r-base libcurl4-openssl-dev libssl-dev r-cran-rcppeigen
+RUN apt-get install --no-install-recommends -y r-base
+RUN apt-get install --no-install-recommends -y libcurl4-openssl-dev libssl-dev
 RUN Rscript -e "install.packages('devtools',repos = 'http://cran.us.r-project.org');"
+RUN Rscript -e "devtools::install_github('RcppCore/Rcpp')"
+RUN Rscript -e "devtools::install_github('RcppCore/RcppEigen')"
 RUN Rscript -e "devtools::install_github('imbs-hl/ranger')"
 # Install the git-lsf module
 WORKDIR /downloads
@@ -89,20 +93,20 @@ RUN git lfs install
 RUN git clone https://github.com/BeauJoh/opencl-predictions-with-aiwc.git $PREDICTIONS
 
 # Install beakerx
-RUN apt-get install --no-install-recommends -y python3-pip python3-setuptools python3-dev libreadline-dev libpcre3-dev libbz2-dev liblzma-dev
+RUN apt-get install --no-install-recommends -y python3-pip python3-setuptools python3-dev libreadline-dev libpcre3-dev libbz2-dev liblzma-dev libicu-dev
 RUN pip3 install --upgrade pip
 RUN pip3 install tzlocal rpy2 requests beakerx \
     && beakerx install
 
 # Install R module for beakerx
-RUN Rscript -e "devtools::install_github('IRkernel/IRkernel')"
-RUN Rscript -e "IRkernel::installspec(user = FALSE)"
-RUN Rscript -e "devtools::install_github('tidyverse/magrittr')"
-RUN Rscript -e "devtools::install_github('tidyverse/ggplot2')"
-RUN Rscript -e "devtools::install_github('tidyverse/tidyr')"
-RUN Rscript -e "devtools::install_github('BeauJoh/fmsb')"
-RUN Rscript -e "devtools::install_github('wilkelab/cowplot')"
-RUN Rscript -e "devtools::install_github('cran/gridGraphics')"
+RUN Rscript -e "devtools::install_github('IRkernel/IRkernel')"\
+    && Rscript -e "IRkernel::installspec(user = FALSE)"\
+    && Rscript -e "devtools::install_github('tidyverse/magrittr')"\
+    && Rscript -e "devtools::install_github('tidyverse/ggplot2')"\
+    && Rscript -e "devtools::install_github('tidyverse/tidyr')"\
+    && Rscript -e "devtools::install_github('BeauJoh/fmsb')"\
+    && Rscript -e "devtools::install_github('wilkelab/cowplot')"\
+    && Rscript -e "devtools::install_github('cran/gridGraphics')"
 
 # Install LetMeKnow
 RUN pip3 install -U 'lmk==0.0.14'
@@ -122,9 +126,11 @@ RUN make
 
 CMD ["/bin/bash"]
 
-#RUN git clone https://github.com/BeauJoh/aiwc-opencl-based-architecture-independent-workload-characterization-artefact.git /aiwc-evaluation
-ADD . /aiwc-evaluation
+COPY . /aiwc-evaluation
+USER root
 WORKDIR /aiwc-evaluation
 ENV LD_LIBRARY_PATH "${OCLGRIND}/lib:${LSB}/lib:${LD_LIBRARYPATH}"
 ENV PATH "${PATH}:${OCLGRIND}/bin}"
 
+#start beakerx/jupyter by default
+CMD ["beakerx", "--allow-root"]
