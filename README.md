@@ -2,10 +2,12 @@
 AIWC: OpenCL-based Architecture Independent Workload Characterization Artefact
 ------------------------------------------------------------------------------
 
+This artefact now uses binder -- automatic cloud hosting of Jupyter workbooks with support for docker.
+So if you want to avoid all the steps mentioned below, simply click the binder badge.
 
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/BeauJoh/aiwc-opencl-based-architecture-independent-workload-characterization-artefact/master)
 
-#Installation
+# Installation
 
 This project uses Docker to facilitate reproducibility. As such, it has the following dependencies:
 
@@ -17,13 +19,13 @@ Optional Dependencies:
 * nvidia-docker2, install instructions found [here](https://github.com/NVIDIA/nvidia-docker)
 * Docker nvidia container, installed with: `sudo apt install nvidia-container-runtime`
 
-#Build
+# Build
 
 To generate a docker image named aiwc-evaluation, run:
 
 `docker build -t aiwc-evaluation .`
 
-#Run
+# Run
 
 To start the docker image run:
 
@@ -40,7 +42,7 @@ from within the container and following the prompts to access it from the websit
 
 `ssh -N -f -L localhost:8888:localhost:8888 <node-name>`
 
-#Investigation
+# Investigation
 
 If you wanted to run Oclgrind -- and AIWC -- on some fresh codes, the binary is located in /oclgrind/bin/oclgrind and the Extended OpenDwarfs Benchmark suite is located in /OpenDwarfs/build/
 AIWC specific source-code can be found in: /oclgrind-source/src/plugins/WorkloadCharacterisation.cpp and /oclgrind-source/src/plugins/WorkloadCharacterisation.h
