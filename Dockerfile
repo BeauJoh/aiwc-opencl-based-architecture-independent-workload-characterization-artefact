@@ -95,18 +95,21 @@ RUN git clone https://github.com/BeauJoh/opencl-predictions-with-aiwc.git $PREDI
 # Install beakerx
 RUN apt-get install --no-install-recommends -y python3-pip python3-setuptools python3-dev libreadline-dev libpcre3-dev libbz2-dev liblzma-dev libicu-dev
 RUN pip3 install --upgrade pip
-RUN pip3 install tzlocal rpy2 requests beakerx \
-    && beakerx install
+RUN pip3 install tzlocal rpy2 requests beakerx
 
 # Install R module for beakerx
 RUN Rscript -e "devtools::install_github('IRkernel/IRkernel')"\
     && Rscript -e "IRkernel::installspec(user = FALSE)"\
+    && Rscript -e "devtools::install_github('cran/RJSONIO')"\
+    && Rscript -e "devtools::install_github('r-lib/httr')"\
     && Rscript -e "devtools::install_github('tidyverse/magrittr')"\
     && Rscript -e "devtools::install_github('tidyverse/ggplot2')"\
     && Rscript -e "devtools::install_github('tidyverse/tidyr')"\
     && Rscript -e "devtools::install_github('BeauJoh/fmsb')"\
     && Rscript -e "devtools::install_github('wilkelab/cowplot')"\
     && Rscript -e "devtools::install_github('cran/gridGraphics')"
+
+RUN beakerx install
 
 # Install LetMeKnow
 RUN pip3 install -U 'lmk==0.0.14'
