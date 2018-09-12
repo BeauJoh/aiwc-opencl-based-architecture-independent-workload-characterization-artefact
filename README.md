@@ -1,4 +1,10 @@
 
+AIWC: OpenCL-based Architecture Independent Workload Characterization Artefact
+------------------------------------------------------------------------------
+
+
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/BeauJoh/aiwc-opencl-based-architecture-independent-workload-characterization-artefact/master)
+
 #Installation
 
 This project uses Docker to facilitate reproducibility. As such, it has the following dependencies:

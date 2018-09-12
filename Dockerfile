@@ -138,6 +138,13 @@ RUN adduser --disabled-password \
     --uid ${NB_UID} \
     ${NB_USER}
 
+#change ownership of all projects needed for investigation
+RUN chown -R ${NB_UID} ${EOD}
+RUN chown -R ${NB_UID} ${LSB}
+RUN chown -R ${NB_UID} ${LEVELDB_ROOT}
+RUN chown -R ${NB_UID} ${OCLGRIND}
+RUN chown -R ${NB_UID} ${PREDICTIONS}
+
 COPY . /aiwc-evaluation
 WORKDIR /aiwc-evaluation
 ENV LD_LIBRARY_PATH "${OCLGRIND}/lib:${LSB}/lib:${LD_LIBRARYPATH}"
